@@ -81,7 +81,7 @@ public class MasterBatchConfiguration {
     public IntegrationFlow outboundFlow(ActiveMQConnectionFactory connectionFactory) {
         return IntegrationFlows
                 .from(requests())
-                .handle(Jms.outboundAdapter(connectionFactory).destination("requests"))
+                .handle(Jms.outboundAdapter(connectionFactory).destination("QUEUE_RECORDS"))
                 .get();
     }
 
@@ -96,7 +96,7 @@ public class MasterBatchConfiguration {
     @Bean
     public IntegrationFlow inboundFlow(ActiveMQConnectionFactory connectionFactory) {
         return IntegrationFlows
-                .from(Jms.messageDrivenChannelAdapter(connectionFactory).destination("replies"))
+                .from(Jms.messageDrivenChannelAdapter(connectionFactory).destination("QUEUE_SPRING_BATCH_METADATA"))
                 .channel(replies())
                 .get();
     }
