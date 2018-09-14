@@ -20,3 +20,4 @@ Para ejecutar el proyecto necesitaremos:
 * [http://www.ontheserverside.com/blog/2014/07/23/horizontal-and-vertical-scaling-strategies-for-batch-applications](http://www.ontheserverside.com/blog/2014/07/23/horizontal-and-vertical-scaling-strategies-for-batch-applications)
 * [https://chelseatroy.com/2016/05/25/spring-batch-with-java-config-an-example/](https://chelseatroy.com/2016/05/25/spring-batch-with-java-config-an-example/)
 * [https://blog.mimacom.com/trigger-spring-batch-job-with-jms-message/](https://blog.mimacom.com/trigger-spring-batch-job-with-jms-message/)
+* [https://docs.spring.io/spring-batch/4.1.x/reference/html/spring-batch-integration.html#remote-chunking](https://docs.spring.io/spring-batch/4.1.x/reference/html/spring-batch-integration.html#remote-chunking)
