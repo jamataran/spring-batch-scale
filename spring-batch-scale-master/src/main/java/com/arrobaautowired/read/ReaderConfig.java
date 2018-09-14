@@ -1,6 +1,6 @@
 package com.arrobaautowired.read;
 
-import com.arrobaautowired.domain.Record;
+import com.arrobaautowired.record.Record;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.batch.item.file.MultiResourceItemReader;
 import org.springframework.batch.item.xml.StaxEventItemReader;

@@ -10,15 +10,13 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>spring-batch-scale-slave</artifactId>
+    <artifactId>spring-batch-scale-domain</artifactId>
+    <name>spring-batch-scale-domain</name>
 
     <dependencies>
         <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-batch</artifactId>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
         </dependency>
-
     </dependencies>
-
-
 </project>

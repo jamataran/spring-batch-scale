@@ -1,4 +1,4 @@
-package com.arrobaautowired.read;
+package com.arrobaautowired.adapter;
 
 import javax.xml.bind.annotation.adapters.XmlAdapter;
 import java.math.BigDecimal;

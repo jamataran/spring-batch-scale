@@ -1,6 +1,5 @@
 package com.arrobaautowired.batch;
 
-import com.arrobaautowired.domain.Record;
 import com.arrobaautowired.write.RecordItemWritter;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.batch.core.Job;
@@ -12,6 +11,7 @@ import org.springframework.batch.item.file.MultiResourceItemReader;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import com.arrobaautowired.record.*;
 
 @Configuration
 @Slf4j

@@ -1,7 +1,7 @@
-package com.arrobaautowired.domain;
+package com.arrobaautowired.record;
 
-import com.arrobaautowired.read.JaxbBigDecimalAdapter;
-import com.arrobaautowired.read.JaxbDateAdapter;
+import com.arrobaautowired.adapter.JaxbBigDecimalAdapter;
+import com.arrobaautowired.adapter.JaxbDateAdapter;
 import lombok.Setter;
 import lombok.ToString;
 
@@ -10,7 +10,6 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import java.math.BigDecimal;
-import java.text.SimpleDateFormat;
 import java.util.Date;
 
 @XmlRootElement(name = "record")
