@@ -6,13 +6,16 @@
     <groupId>com.arrobaautowired</groupId>
     <artifactId>spring-batch-scale-parent</artifactId>
     <version>1.0.0-SNAPSHOT</version>
-    <modules>
-        <module>spring-batch-scale-master</module>
-    </modules>
+
     <packaging>pom</packaging>
 
     <name>spring-batch-scale-parent</name>
     <description>Spring Batch Scale Sample</description>
+
+    <modules>
+        <module>spring-batch-scale-master</module>
+        <module>spring-batch-scale-slave</module>
+    </modules>
 
     <parent>
         <groupId>org.springframework.boot</groupId>
@@ -24,7 +27,10 @@
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+
+        <!-- Versiones utilizadas -->
         <java.version>1.8</java.version>
+        <oxm.version>3.0.4.RELEASE</oxm.version>
     </properties>
 
     <dependencies>
@@ -36,7 +42,6 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-cache</artifactId>
         </dependency>
-
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-devtools</artifactId>
@@ -61,6 +66,11 @@
             <groupId>com.h2database</groupId>
             <artifactId>h2</artifactId>
             <scope>runtime</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-oxm</artifactId>
+            <version>${oxm.version}</version>
         </dependency>
     </dependencies>
 

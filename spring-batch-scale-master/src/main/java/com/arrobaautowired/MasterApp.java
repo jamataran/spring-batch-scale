@@ -3,6 +3,7 @@ package com.arrobaautowired;
 import org.springframework.batch.core.configuration.annotation.EnableBatchProcessing;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.Configuration;
 
 /**
  * Aplicación principal del Batch. Su misión sera
@@ -22,4 +23,5 @@ public class MasterApp {
     public static void main(String[] args) {
         SpringApplication.run(MasterApp.class, args);
     }
+
 }
