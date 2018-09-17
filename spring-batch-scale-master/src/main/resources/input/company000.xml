@@ -1,0 +1,63 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<company>
+    <record>
+        <age>1</age>
+        <name>Roselin Maccrie</name>
+        <dob>12/11/2016</dob>
+        <income>298,65</income>
+    </record>
+    <record>
+        <age>2</age>
+        <name>Culver Gapper</name>
+        <dob>8/1/2014</dob>
+        <income>751,89</income>
+    </record>
+    <record>
+        <age>3</age>
+        <name>Hayyim Fetter</name>
+        <dob>1/13/2002</dob>
+        <income>146,62</income>
+    </record>
+    <record>
+        <age>4</age>
+        <name>Hortensia Willshee</name>
+        <dob>3/15/2016</dob>
+        <income/>
+    </record>
+    <record>
+        <age>5</age>
+        <name>Brittaney Bliben</name>
+        <dob>10/15/2010</dob>
+        <income>869,95</income>
+    </record>
+    <record>
+        <age>6</age>
+        <name>Brenda Waddell</name>
+        <dob>5/4/2010</dob>
+        <income>283,53</income>
+    </record>
+    <record>
+        <age>7</age>
+        <name>Burgess Feldbau</name>
+        <dob>6/30/2008</dob>
+        <income/>
+    </record>
+    <record>
+        <age>8</age>
+        <name>Jonathan Parlet</name>
+        <dob>6/16/2001</dob>
+        <income/>
+    </record>
+    <record>
+        <age>9</age>
+        <name>Audrey Lempenny</name>
+        <dob>7/27/2017</dob>
+        <income>565,43</income>
+    </record>
+    <record>
+        <age>10</age>
+        <name>Ilise Semiras</name>
+        <dob>5/3/2017</dob>
+        <income>106,98</income>
+    </record>
+</company>

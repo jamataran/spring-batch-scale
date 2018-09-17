@@ -1,16 +1,19 @@
 package com.arrobaautowired.batch;
 
 import com.arrobaautowired.processor.PaymentWriter;
-import com.arrobaautowired.processor.RecordProcessor;
+import com.arrobaautowired.processor.ComplexRecordProcessor;
+import com.arrobaautowired.processor.SimpleRecordProcessor;
 import com.arrobaautowired.record.Record;
 import org.apache.activemq.spring.ActiveMQConnectionFactory;
 import org.springframework.batch.core.step.item.SimpleChunkProcessor;
 import org.springframework.batch.integration.chunk.ChunkProcessorChunkHandler;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Profile;
 import org.springframework.integration.annotation.IntegrationComponentScan;
 import org.springframework.integration.annotation.ServiceActivator;
 import org.springframework.integration.channel.DirectChannel;
+import org.springframework.integration.config.AggregatorFactoryBean;
 import org.springframework.integration.config.EnableIntegration;
 import org.springframework.integration.dsl.IntegrationFlow;
 import org.springframework.integration.dsl.IntegrationFlows;
@@ -61,8 +64,8 @@ public class WorkerBatchConfiguration {
                 .get();
     }
 
-    /*@Bean
-    @ServiceActivator(inputChannel = "requests")
+   /* @Bean
+    @ServiceActivator(inputChannel = "requests", outputChannel = "replies", sendTimeout = "10000")
     public AggregatorFactoryBean serviceActivator() throws Exception {
         AggregatorFactoryBean aggregatorFactoryBean = new AggregatorFactoryBean();
         aggregatorFactoryBean.setProcessorBean(chunkProcessorChunkHandler());
@@ -80,14 +83,13 @@ public class WorkerBatchConfiguration {
     }
 
     @Bean
-    public RecordProcessor recordProcessor() {
-        return new RecordProcessor();
+    public SimpleRecordProcessor recordProcessor() {
+        return new SimpleRecordProcessor();
     }
 
     @Bean
     public PaymentWriter paymentWriter() {
         return new PaymentWriter();
     }
-
 
 }

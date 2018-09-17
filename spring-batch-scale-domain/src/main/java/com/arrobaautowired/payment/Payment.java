@@ -4,6 +4,7 @@ import com.arrobaautowired.adapter.JaxbBigDecimalAdapter;
 import lombok.Builder;
 import lombok.EqualsAndHashCode;
 import lombok.Setter;
+import lombok.ToString;
 
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
@@ -16,6 +17,7 @@ import java.math.BigDecimal;
 @Setter
 @Builder
 @EqualsAndHashCode
+@ToString
 public class Payment implements Serializable {
 
     private String fullName;

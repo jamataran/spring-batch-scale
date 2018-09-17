@@ -29,18 +29,20 @@ public class MasterBatchConfiguration {
 
     private final static String MASTER_JOB_TEST = "JOB_MASTER";
     private final static String MATER_JOB_STEP = "STEP-1";
-    private final static int CHUNK_SIZE = 100;
+    private final static int CHUNK_SIZE = 50;
 
     private JobBuilderFactory jobBuilderFactory;
     private StepBuilderFactory stepBuilderFactory;
     private MultiResourceItemReader<Record> filesReader;
+    private StepListener stepListener;
 
 
     @Autowired
-    public MasterBatchConfiguration(JobBuilderFactory jobBuilderFactory, StepBuilderFactory stepBuilderFactory, MultiResourceItemReader<Record> filesReader) {
+    public MasterBatchConfiguration(JobBuilderFactory jobBuilderFactory, StepBuilderFactory stepBuilderFactory, MultiResourceItemReader<Record> filesReader, StepListener stepListener) {
         this.jobBuilderFactory = jobBuilderFactory;
         this.stepBuilderFactory = stepBuilderFactory;
         this.filesReader = filesReader;
+        this.stepListener = stepListener;
     }
 
     @Bean
@@ -59,6 +61,7 @@ public class MasterBatchConfiguration {
                 .<Record, Payment>chunk(CHUNK_SIZE)
                 .reader(filesReader)
                 .writer(itemWriter())
+                .listener(stepListener)
                 .build();
     }
 

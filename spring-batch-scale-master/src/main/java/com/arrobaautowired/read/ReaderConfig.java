@@ -38,7 +38,7 @@ public class ReaderConfig {
         // Configuro los origenes (Para este ejemplo los leo del classpath)
         ClassLoader cLoader = this.getClass().getClassLoader();
         ResourcePatternResolver resolver = new PathMatchingResourcePatternResolver(cLoader);
-        multiResourceItemReader.setResources(resolver.getResources("classpath:input/company001.xml")); //FIXME: Varios ficheros.
+        multiResourceItemReader.setResources(resolver.getResources("classpath:input/company000.xml")); //FIXME: Varios ficheros.
         //multiResourceItemReader.setResources(resolver.getResources(inFolder));
         log.debug("Configurada instancia ResourcePatternResolver {} con carpeta {}", resolver, inFolder);
 

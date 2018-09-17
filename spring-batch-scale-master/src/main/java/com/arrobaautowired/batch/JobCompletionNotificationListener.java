@@ -13,8 +13,7 @@ public class JobCompletionNotificationListener extends JobExecutionListenerSuppo
     @Override
     public void afterJob(JobExecution jobExecution) {
         if (jobExecution.getStatus() == BatchStatus.COMPLETED) {
-            log.debug("Finalizó la ejecución del proceso.");
-            log.debug("JobExecution: {}", jobExecution);
+            log.debug("\n======================================================================================================================================================================================================================================================\n\n\n\n\nFinalizó la ejecución del proceso.\nJobExecution: {}\n\n\n\n\n======================================================================================================================================================================================================================================================", jobExecution);
         }
     }
 }

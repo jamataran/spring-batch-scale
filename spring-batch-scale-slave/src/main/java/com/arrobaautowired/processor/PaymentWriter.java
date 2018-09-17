@@ -10,6 +10,12 @@ import java.util.List;
 public class PaymentWriter implements ItemWriter<Payment> {
     @Override
     public void write(List<? extends Payment> list) throws Exception {
-        log.debug("SLAVE:\tPayments: {}", list);
+        log.debug("\n\nFINALIZADO CHUNK  ============================\n\n");
+        list.parallelStream().forEach(this::writePayment);
+        log.debug("\n\n==============================================\n\n");
+    }
+
+    private void writePayment(Payment payment) {
+        log.debug("\t\tPAYMENT: {}", payment);
     }
 }

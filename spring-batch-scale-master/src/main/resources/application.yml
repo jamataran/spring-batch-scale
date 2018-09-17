@@ -3,9 +3,6 @@ spring:
     driverClassName: org.h2.Driver
     url: jdbc:h2:mem:bootexample;MODE=MySQL
 
-security:
-  ignored: /**
-
 masterapp:
   infolder: classpath:input/
   inroot: company
@@ -19,3 +16,4 @@ logging:
       springframework:
         batch: trace
         oxm: trace
+        integration: trace
