@@ -66,6 +66,7 @@ public class MasterBatchConfiguration {
     public ActiveMQConnectionFactory connectionFactory() {
         ActiveMQConnectionFactory factory = new ActiveMQConnectionFactory();
         factory.setBrokerURL("tcp://localhost:61616");
+        factory.setTrustAllPackages(Boolean.TRUE);
         return factory;
     }
 
@@ -78,10 +79,12 @@ public class MasterBatchConfiguration {
     }
 
     @Bean
-    public IntegrationFlow outboundFlow(ActiveMQConnectionFactory connectionFactory) {
+    public IntegrationFlow jmsOutboundFlow(ActiveMQConnectionFactory connectionFactory) {
         return IntegrationFlows
-                .from(requests())
-                .handle(Jms.outboundAdapter(connectionFactory).destination("QUEUE_RECORDS"))
+                .from("requests")
+                .handle(Jms
+                        .outboundAdapter(connectionFactory)
+                        .destination("requests"))
                 .get();
     }
 
@@ -96,7 +99,7 @@ public class MasterBatchConfiguration {
     @Bean
     public IntegrationFlow inboundFlow(ActiveMQConnectionFactory connectionFactory) {
         return IntegrationFlows
-                .from(Jms.messageDrivenChannelAdapter(connectionFactory).destination("QUEUE_SPRING_BATCH_METADATA"))
+                .from(Jms.messageDrivenChannelAdapter(connectionFactory).destination("replies"))
                 .channel(replies())
                 .get();
     }
