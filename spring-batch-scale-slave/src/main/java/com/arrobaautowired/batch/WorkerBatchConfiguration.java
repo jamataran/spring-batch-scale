@@ -58,9 +58,7 @@ public class WorkerBatchConfiguration {
     public IntegrationFlow outgoingReplies() {
         return IntegrationFlows
                 .from("replies")
-                .handle(Jms
-                        .outboundGateway(connectionFactory())
-                        .requestDestination("replies"))
+                .handle(Jms.outboundAdapter(connectionFactory()).destination("replies"))
                 .get();
     }
 
@@ -83,8 +81,8 @@ public class WorkerBatchConfiguration {
     }
 
     @Bean
-    public SimpleRecordProcessor recordProcessor() {
-        return new SimpleRecordProcessor();
+    public ComplexRecordProcessor recordProcessor() {
+        return new ComplexRecordProcessor();
     }
 
     @Bean

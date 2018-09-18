@@ -29,7 +29,7 @@ public class MasterBatchConfiguration {
 
     private final static String MASTER_JOB_TEST = "JOB_MASTER";
     private final static String MATER_JOB_STEP = "STEP-1";
-    private final static int CHUNK_SIZE = 50;
+    private final static int CHUNK_SIZE = 20;
 
     private JobBuilderFactory jobBuilderFactory;
     private StepBuilderFactory stepBuilderFactory;
