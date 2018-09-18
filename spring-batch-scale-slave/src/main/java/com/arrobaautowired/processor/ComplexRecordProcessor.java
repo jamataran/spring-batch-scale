@@ -58,18 +58,18 @@ public class ComplexRecordProcessor implements ItemProcessor<Record, Payment> {
             // Lentitud.
             case 0:
                 log.debug("\t\tSimulando delay de procesamiento...");
-                int delay = randomizador.nextInt(10000);
+                int delay = randomizador.nextInt(60000);
                 log.debug("\t\t\tDelay generado: {}", delay);
                 log.debug("\t\t\tDurmiendo...");
-                Thread.sleep(delay);
+                Thread.sleep(60000);
                 log.debug("\t\t\tDespertando...");
                 break;
 
             // Excepción
             case 1:
                 log.debug("\t\tSe produjo una excepción en el procesamiento...");
-                if (record.getIncome().compareTo(BigDecimal.valueOf(900L)) > 0)
-                    throw new Exception("Error Gravísimo en Record ".concat(record.toString()));
+//                if (record.getIncome().compareTo(BigDecimal.valueOf(900L)) > 0)
+//                    throw new RuntimeException("Error Gravísimo en Record ".concat(record.toString()));
 
                 // Funcionamiento esperado.
             case 2:
