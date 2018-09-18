@@ -1,5 +1,5 @@
 # spring-batch-scale
-Pruebas de concepto para escalado horizontal de procesos Spring Batch utilizando JMS como canal conductor.
+Pruebas de concepto para escalado horizontal de procesos Spring Batch utilizando JMS como canal conductor. Se ha elegido esta implementación al realizar un estudio de los procesos de negocio y observar que el cuello de botella de la aplicación estaría en el _Processor_.
 
 Spring Batch nos ofrence las características de grandes procesados de datos. Para hacer un escalado horizontal, a través de varios noodos, necesitamos usar un _middleware_, en mi ejemplo voy a usar una implementación de **Cola JMS**.
 
@@ -26,6 +26,18 @@ Para ejecutar el proyecto necesitaremos:
 ```bash
 java -jar lib/hawtio-app-2.0.3.jar --port 9999
 ```
+
+### Estructura del proyecto.
+
+Este proyecto es sólo una **PRUEBA DE CONCEPTO**, algunas funciones como generación de excepciones, acceso a base de datos, etc. han sido _mockeadas_, de manera que se pueda centrar el proyecto en  Las funcionalidades que se han desarrollado se encuentran distribuidas en un proyecto _Maven_ multimódulo. 
+
+Los módulos principales son:
+### ````spring-batch-scale-master````
+
+### ````spring-batch-scale-slave````
+
+### ````spring-batch-scale-domain````
+
 
 ## Bibliografía
 * [http://www.ontheserverside.com/blog/2014/07/23/horizontal-and-vertical-scaling-strategies-for-batch-applications](http://www.ontheserverside.com/blog/2014/07/23/horizontal-and-vertical-scaling-strategies-for-batch-applications)

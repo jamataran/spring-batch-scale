@@ -1,23 +1,22 @@
 package com.arrobaautowired.batch;
 
 import com.arrobaautowired.processor.PaymentWriter;
-import com.arrobaautowired.processor.ComplexRecordProcessor;
-import com.arrobaautowired.processor.SimpleRecordProcessor;
+import com.arrobaautowired.processor.RecordProcessor;
 import com.arrobaautowired.record.Record;
 import org.apache.activemq.spring.ActiveMQConnectionFactory;
 import org.springframework.batch.core.step.item.SimpleChunkProcessor;
 import org.springframework.batch.integration.chunk.ChunkProcessorChunkHandler;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Profile;
 import org.springframework.integration.annotation.IntegrationComponentScan;
 import org.springframework.integration.annotation.ServiceActivator;
 import org.springframework.integration.channel.DirectChannel;
-import org.springframework.integration.config.AggregatorFactoryBean;
 import org.springframework.integration.config.EnableIntegration;
 import org.springframework.integration.dsl.IntegrationFlow;
 import org.springframework.integration.dsl.IntegrationFlows;
 import org.springframework.integration.jms.dsl.Jms;
+
+import java.util.UUID;
 
 
 @Configuration
@@ -48,7 +47,10 @@ public class WorkerBatchConfiguration {
         return IntegrationFlows
                 .from(Jms
                         .messageDrivenChannelAdapter(connectionFactory())
-                        .configureListenerContainer(c -> c.subscriptionDurable(false))
+                        .configureListenerContainer(c -> {
+                            c.subscriptionDurable(false);
+                            c.clientId(UUID.randomUUID().toString());
+                        })
                         .destination("requests"))
                 .channel(requests())
                 .get();
@@ -62,16 +64,7 @@ public class WorkerBatchConfiguration {
                 .get();
     }
 
-   /* @Bean
-    @ServiceActivator(inputChannel = "requests", outputChannel = "replies", sendTimeout = "10000")
-    public AggregatorFactoryBean serviceActivator() throws Exception {
-        AggregatorFactoryBean aggregatorFactoryBean = new AggregatorFactoryBean();
-        aggregatorFactoryBean.setProcessorBean(chunkProcessorChunkHandler());
-        aggregatorFactoryBean.setOutputChannel(replies());
-
-        return aggregatorFactoryBean;
-    }*/
-
+    @SuppressWarnings("unchecked")
     @Bean
     @ServiceActivator(inputChannel = "requests", outputChannel = "replies", sendTimeout = "10000")
     public ChunkProcessorChunkHandler<Record> chunkProcessorChunkHandler() {
@@ -81,8 +74,8 @@ public class WorkerBatchConfiguration {
     }
 
     @Bean
-    public ComplexRecordProcessor recordProcessor() {
-        return new ComplexRecordProcessor();
+    public RecordProcessor recordProcessor() {
+        return new RecordProcessor();
     }
 
     @Bean

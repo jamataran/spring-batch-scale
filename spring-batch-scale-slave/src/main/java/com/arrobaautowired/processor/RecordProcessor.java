@@ -18,9 +18,9 @@ import java.util.Random;
  * </ul>
  */
 @Slf4j
-public class ComplexRecordProcessor implements ItemProcessor<Record, Payment> {
+public class RecordProcessor implements ItemProcessor<Record, Payment> {
 
-    public static String getRandomBic() {
+    private static String getRandomBic() {
         String start = "ES";
         Random value = new Random();
 
@@ -49,36 +49,8 @@ public class ComplexRecordProcessor implements ItemProcessor<Record, Payment> {
     public Payment process(Record record) throws Exception {
         log.debug("\tComenzando el procesado de: {}", record);
 
-        Random randomizador = new Random();
-
-        int comportamientoAleatorio = randomizador.nextInt(3);
-        log.debug("Comportamiento de {}: {}", record, comportamientoAleatorio);
-
-        switch (comportamientoAleatorio) {
-            // Lentitud.
-            case 0:
-                log.debug("\t\tSimulando delay de procesamiento...");
-                int delay = randomizador.nextInt(60000);
-                log.debug("\t\t\tDelay generado: {}", delay);
-                log.debug("\t\t\tDurmiendo...");
-                Thread.sleep(60000);
-                log.debug("\t\t\tDespertando...");
-                break;
-
-            // Excepción
-            case 1:
-                log.debug("\t\tSe produjo una excepción en el procesamiento...");
-//                if (record.getIncome().compareTo(BigDecimal.valueOf(900L)) > 0)
-//                    throw new RuntimeException("Error Gravísimo en Record ".concat(record.toString()));
-
-                // Funcionamiento esperado.
-            case 2:
-                log.debug("\t\tTodo bien...");
-                break;
-            default:
-                log.error("Comportamiento no contemplado");
-                break;
-        }
+        log.debug("\t\tSimulando delay de 20s para el procesado {}", record);
+        Thread.sleep(20000);
 
         Payment payment = Payment
                 .builder()
@@ -87,7 +59,7 @@ public class ComplexRecordProcessor implements ItemProcessor<Record, Payment> {
                 .bic(getRandomBic())
                 .currency('€')
                 .build();
-        log.debug("\tSe ha conseguido generar el pago {} a partir del record {}", payment, record);
+        log.debug("\n\tNUEVO PAGO OBTENIDO\n\t\t{}\t==>\t{}\n", record, payment);
         return payment;
     }
 }
