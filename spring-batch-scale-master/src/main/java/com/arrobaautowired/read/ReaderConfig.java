@@ -18,7 +18,7 @@ public class ReaderConfig {
     @Value("${masterapp.inroot}")
     private String inRoot;
 
-    @Value("${masterapp.infolder}")
+    @Value("${masterapp.infolder: classpath:input/*.xml}")
     private String inFolder;
 
     /**
@@ -38,8 +38,7 @@ public class ReaderConfig {
         // Configuro los origenes (Para este ejemplo los leo del classpath)
         ClassLoader cLoader = this.getClass().getClassLoader();
         ResourcePatternResolver resolver = new PathMatchingResourcePatternResolver(cLoader);
-        multiResourceItemReader.setResources(resolver.getResources("classpath:input/company001.xml")); //FIXME: Varios ficheros.
-        //multiResourceItemReader.setResources(resolver.getResources(inFolder));
+        multiResourceItemReader.setResources(resolver.getResources(inFolder));
         log.debug("Configurada instancia ResourcePatternResolver {} con carpeta {}", resolver, inFolder);
 
         // Delego la lectura de cada fichero.
@@ -63,7 +62,6 @@ public class ReaderConfig {
 
         // Para leer los ficheros necesito una instancia de marshaller (ver abajo)
         staxEventItemReader.setUnmarshaller(marshaller());
-        //staxEventItemReader.setFragmentRootElementName("company");
         staxEventItemReader.setFragmentRootElementNames(new String[]{
                 "record",
         });
@@ -86,7 +84,6 @@ public class ReaderConfig {
         // Instancio el objeto marshaller.
         Jaxb2Marshaller marshaller = new Jaxb2Marshaller();
         marshaller.setClassesToBeBound(Record.class);
-        //marshaller.(Record.class);
         marshaller.afterPropertiesSet();
 
         // Devuelvo el marshaller.

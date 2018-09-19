@@ -4,6 +4,7 @@ import com.arrobaautowired.payment.Payment;
 import com.arrobaautowired.record.Record;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.batch.item.ItemProcessor;
+import org.springframework.beans.factory.annotation.Value;
 
 import java.math.BigDecimal;
 import java.util.Random;
@@ -19,6 +20,10 @@ import java.util.Random;
  */
 @Slf4j
 public class RecordProcessor implements ItemProcessor<Record, Payment> {
+
+    @Value("${sleep:0}")
+    private Long recordDelayProcess;
+
 
     private static String getRandomBic() {
         String start = "ES";
@@ -49,8 +54,8 @@ public class RecordProcessor implements ItemProcessor<Record, Payment> {
     public Payment process(Record record) throws Exception {
         log.debug("\tComenzando el procesado de: {}", record);
 
-        log.debug("\t\tSimulando delay de 20s para el procesado {}", record);
-        Thread.sleep(20000);
+        log.debug("\t\tSimulando delay de {} ms para el procesado {}",recordDelayProcess, record);
+        Thread.sleep(recordDelayProcess);
 
         Payment payment = Payment
                 .builder()

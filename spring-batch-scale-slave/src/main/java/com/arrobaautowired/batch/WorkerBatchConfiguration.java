@@ -1,11 +1,13 @@
 package com.arrobaautowired.batch;
 
-import com.arrobaautowired.processor.PaymentWriter;
+import com.arrobaautowired.writer.PaymentWriter;
 import com.arrobaautowired.processor.RecordProcessor;
 import com.arrobaautowired.record.Record;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.activemq.spring.ActiveMQConnectionFactory;
 import org.springframework.batch.core.step.item.SimpleChunkProcessor;
 import org.springframework.batch.integration.chunk.ChunkProcessorChunkHandler;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.integration.annotation.IntegrationComponentScan;
@@ -22,12 +24,18 @@ import java.util.UUID;
 @Configuration
 @IntegrationComponentScan
 @EnableIntegration
+@Slf4j
 public class WorkerBatchConfiguration {
 
+    @Value("${slave.broker-url}")
+    private String brokerUrl;
+
     @Bean
+    @SuppressWarnings("Duplicates")
     public ActiveMQConnectionFactory connectionFactory() {
+        log.info("Creando conexión ActiveMQConnectionFactory con Broker URL {}", brokerUrl);
         ActiveMQConnectionFactory factory = new ActiveMQConnectionFactory();
-        factory.setBrokerURL("tcp://localhost:61616");
+        factory.setBrokerURL(brokerUrl);
         factory.setTrustAllPackages(Boolean.TRUE);
         return factory;
     }

@@ -1,4 +1,4 @@
-package com.arrobaautowired.processor;
+package com.arrobaautowired.writer;
 
 import com.arrobaautowired.payment.Payment;
 import lombok.extern.slf4j.Slf4j;

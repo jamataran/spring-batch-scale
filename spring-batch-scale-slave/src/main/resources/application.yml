@@ -1,8 +1,11 @@
 logging:
+  path: log/slave
   level:
     root: info
     com:
       arrobaautowired: debug
     org:
       springframework:
-        integration: trace
+        integration: info
+slave:
+  broker-url: tcp://localhost:61616

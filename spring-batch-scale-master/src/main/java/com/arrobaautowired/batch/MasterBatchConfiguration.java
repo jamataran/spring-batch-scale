@@ -13,6 +13,7 @@ import org.springframework.batch.integration.chunk.ChunkMessageChannelItemWriter
 import org.springframework.batch.item.ItemWriter;
 import org.springframework.batch.item.file.MultiResourceItemReader;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.integration.channel.DirectChannel;
@@ -27,14 +28,17 @@ import org.springframework.integration.jms.dsl.Jms;
 @EnableBatchProcessing
 public class MasterBatchConfiguration {
 
-    private final static String MASTER_JOB_TEST = "JOB_MASTER";
-    private final static String MATER_JOB_STEP = "STEP-1";
-    private final static int CHUNK_SIZE = 5;
+    private static final String MASTER_JOB_TEST = "JOB_MASTER";
+    private static final String MATER_JOB_STEP = "STEP-1";
+    private static final int CHUNK_SIZE = 5;
 
     private JobBuilderFactory jobBuilderFactory;
     private StepBuilderFactory stepBuilderFactory;
     private MultiResourceItemReader<Record> filesReader;
     private StepListener stepListener;
+
+    @Value("${master.broker-url}")
+    private String brokerUrl;
 
 
     @Autowired
@@ -66,9 +70,11 @@ public class MasterBatchConfiguration {
     }
 
     @Bean
+    @SuppressWarnings("Duplicates")
     public ActiveMQConnectionFactory connectionFactory() {
+        log.info("Creando conexión ActiveMQConnectionFactory con Broker URL {}", brokerUrl);
         ActiveMQConnectionFactory factory = new ActiveMQConnectionFactory();
-        factory.setBrokerURL("tcp://localhost:61616");
+        factory.setBrokerURL(brokerUrl);
         factory.setTrustAllPackages(Boolean.TRUE);
         return factory;
     }
